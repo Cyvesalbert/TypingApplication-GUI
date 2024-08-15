@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 public class TypingApp extends JFrame implements KeyListener {
 
@@ -51,12 +52,14 @@ public class TypingApp extends JFrame implements KeyListener {
         for (String key : keys) {
             JButton button = new JButton(key);
             keyButtonMap.put(key, button); // Store the button with its corresponding key in the map
-            add(button);
             button.addKeyListener(this);
             //panel.add(button);
             
+            add(button);
         }
-      
+        
+        getContentPane().setFocusable(true);
+        
 	}
 
 	@Override
@@ -68,19 +71,15 @@ public class TypingApp extends JFrame implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
+		
 		String text = KeyEvent.getKeyText(event.getKeyCode());
-	    typingArea.setText(text);
-
-	    // Reset all buttons to default color first
-	    for (JButton button : keyButtonMap.values()) {
-	        button.setBackground(Color.LIGHT_GRAY);
-	    }
-
-	    // If a key is pressed and its corresponding button exists, highlight it
-	    JButton pressedButton = keyButtonMap.get(text);
-	    if (pressedButton != null) {
-	        pressedButton.setBackground(Color.RED);
-	    }
+		typingArea.append(text);
+		
+		JButton button = getButtonForKey(text); // Find the corresponding button and change its background color
+		
+		if(button != null	) {
+			button.setBackground(Color.RED);
+		}
 		
 	}
 
