@@ -3,6 +3,8 @@ package ht.typingapp;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -12,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class TypingApp extends JFrame {
+public class TypingApp extends JFrame implements KeyListener {
 
 	private JLabel messageLabel;
 	//private JPanel panel;
@@ -49,9 +51,32 @@ public class TypingApp extends JFrame {
         }
 
 	}
-	
-	
-	
+
+	@Override
+	public void keyTyped(KeyEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+		// TODO Auto-generated method stub
+		String text = KeyEvent.getKeyText(event.getKeyCode());
+		typingArea.setText(text);
+		for(String key : keys) {
+			if(text == key) {
+				
+			}
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }
